@@ -151,13 +151,13 @@ public class EntityPokeball extends Entity {
          ++this.redstoneRepeaterActive;
       }
 
-      Vec3 var16 = Vec3.fakePool.getVecFromPool(this.posX, this.posY, this.posZ);
-      Vec3 var2 = Vec3.fakePool.getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+      Vec3 var16 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
+      Vec3 var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
       MovingObjectPosition var3 = this.worldObj.rayTraceBlocks(var16, var2);
-      var16 = Vec3.fakePool.getVecFromPool(this.posX, this.posY, this.posZ);
-      var2 = Vec3.fakePool.getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
+      var16 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX, this.posY, this.posZ);
+      var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(this.posX + this.motionX, this.posY + this.motionY, this.posZ + this.motionZ);
       if(var3 != null) {
-         var2 = Vec3.fakePool.getVecFromPool(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
+         var2 = this.worldObj.getWorldVec3Pool().getVecFromPool(var3.hitVec.xCoord, var3.hitVec.yCoord, var3.hitVec.zCoord);
       }
 
       Entity var4;
@@ -210,7 +210,7 @@ public class EntityPokeball extends Entity {
                this.worldObj.spawnEntityInWorld(var4);
                this.entityDropItem(new ItemStack(Pokeball.pokeball), 0.0F);
             } catch (Exception var15) {
-               var15.printStackTrace();
+               System.out.println("No Entity");
             }
          }
 

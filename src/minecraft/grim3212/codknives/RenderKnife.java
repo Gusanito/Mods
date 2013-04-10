@@ -17,7 +17,7 @@ public class RenderKnife extends Render {
 
    public void renderArrow(EntityKnife var1, double var2, double var4, double var6, float var8, float var9) {
       if(var1.prevRotationYaw != 0.0F || var1.prevRotationPitch != 0.0F) {
-         this.loadTexture("/grim3212-GFX/codknives/kitems.png");
+         this.loadTexture("/mods/CodKnives/textures/entities/kitems.png");
          GL11.glPushMatrix();
          GL11.glTranslatef((float)var2, (float)var4, (float)var6);
          GL11.glRotatef(var1.prevRotationYaw + (var1.rotationYaw - var1.prevRotationYaw) * var9 - 90.0F, 0.0F, 1.0F, 0.0F);
