@@ -56,9 +56,9 @@ public class ElementalBlocks {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		try {
 			config.load();
-			fireBlockID = config.get(Configuration.CATEGORY_BLOCK, "Fire Block ID", 2689).getInt(2689);
-			lavaBlockID = config.get(Configuration.CATEGORY_BLOCK, "Lava Block ID", 2690).getInt(2690);
-			waterBlockID = config.get(Configuration.CATEGORY_BLOCK, "Water Block ID", 2691).getInt(2691);
+			fireBlockID = config.get(Configuration.CATEGORY_BLOCK, "Fire Block ID", 2723).getInt(2723);
+			lavaBlockID = config.get(Configuration.CATEGORY_BLOCK, "Lava Block ID", 2724).getInt(2724);
+			waterBlockID = config.get(Configuration.CATEGORY_BLOCK, "Water Block ID", 2725).getInt(2725);
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, "Elemental Blocks has had a problem loading it's configuration");
 		} finally {

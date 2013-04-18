@@ -66,13 +66,13 @@ public class BallisticKnife {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		try {
 			config.load();
-			loadedKnifeID = config.get(Configuration.CATEGORY_ITEM, "Loaded Ballistic Knife ID", 9071).getInt(9071);
-			unloadedKnifeID = config.get(Configuration.CATEGORY_ITEM, "Unloaded Ballistic Knife ID", 9072).getInt(9072);
-			buttonPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Button Part ID", 9073).getInt(9073);
-			springPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Spring Part ID", 9074).getInt(9074);
-			casingPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Casing Part ID", 9075).getInt(9075);
-			rodPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Rod Part ID", 9076).getInt(9076);
-			ammoPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Ammo Part ID", 9077).getInt(9077);
+			loadedKnifeID = config.get(Configuration.CATEGORY_ITEM, "Loaded Ballistic Knife ID", 9115).getInt(9115);
+			unloadedKnifeID = config.get(Configuration.CATEGORY_ITEM, "Unloaded Ballistic Knife ID", 9116).getInt(9116);
+			buttonPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Button Part ID", 9117).getInt(9117);
+			springPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Spring Part ID", 9118).getInt(9118);
+			casingPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Casing Part ID", 9119).getInt(9119);
+			rodPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Rod Part ID", 9120).getInt(9120);
+			ammoPartID = config.get(Configuration.CATEGORY_ITEM, "Ballistic Knife Ammo Part ID", 9121).getInt(9121);
 		} catch (Exception e) {
 			FMLLog.log(Level.SEVERE, e, "Ballistic Knife has had a problem loading it's configuration");
 		} finally {

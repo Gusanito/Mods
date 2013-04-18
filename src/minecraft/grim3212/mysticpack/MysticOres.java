@@ -1,0 +1,560 @@
+package grim3212.mysticpack;
+
+import grim3212.mysticpack.common.MysticTab;
+
+import java.util.Random;
+import java.util.logging.Level;
+
+import net.minecraft.block.Block;
+import net.minecraft.block.BlockGrass;
+import net.minecraft.block.BlockLeaves;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
+import net.minecraft.world.gen.feature.WorldGenMinable;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.EnumHelper;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.Mod.PreInit;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkMod;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
+@Mod(modid = "MysticOres", name = "Mystic Ores", version = "1.0")
+@NetworkMod(clientSideRequired = true, serverSideRequired = false)
+public class MysticOres {
+	@SidedProxy(clientSide = "grim3212.mysticpack.common.ClientProxy", serverSide = "grim3212.mysticpack.common.CommonProxy")
+	public static grim3212.mysticpack.common.CommonProxy proxy;
+	@Instance("MysticOres")
+	public static MysticOres instance;
+	
+	public static Block mithril;
+	public static Block adamantine;
+	public static Block verdite;
+	public static Block emerald;
+	public static Block sapphire;
+	public static Block topaz;
+	public static Block amethyst;
+	public static Block soulstoneBlack;
+	public static Block soulstoneRed;
+	public static Block soulstoneBlue;
+	public static Block bloodstone;
+	public static Block reinforcedGlass;
+	public static Block iridium;
+	
+	public static Item mithrilIngot;
+	public static Item adamantineIngot;
+	public static Item verditeIngot;
+	public static Item emeraldGem;
+	public static Item sapphireGem;
+	public static Item topazGem;
+	public static Item amethystGem;
+	public static Item mithrilPick;
+	public static Item mithrilShovel;
+	public static Item mithrilAxe;
+	public static Item mithrilHoe;
+	public static Item mithrilSword;
+	public static Item adamantinePick;
+	public static Item adamantineShovel;
+	public static Item adamantineAxe;
+	public static Item adamantineHoe;
+	public static Item adamantineSword;
+	
+	public static Item verditePick;
+	public static Item verditeShovel;
+	public static Item verditeAxe;
+	public static Item verditeHoe;
+	public static Item verditeSword;
+	public static Item obsidianShard;
+	public static Item obsidianRod;
+	public static Item glassShard;
+	public static Item bloodstoneShard;
+	public static Item bloodstonePick;
+	public static Item bloodstoneShovel;
+	public static Item bloodstoneAxe;
+	public static Item bloodstoneHoe;
+	public static Item bloodstoneSword;
+	public static Item obsidianPick;
+	public static Item obsidianShovel;
+	public static Item obsidianAxe;
+	public static Item obsidianHoe;
+	public static Item obsidianSword;
+	public static Item iridiumIngot;
+	public static Item iridiumNugget;
+	public static Item iridiumPick;
+	public static Item iridiumShovel;
+	public static Item iridiumAxe;
+	public static Item iridiumHoe;
+	public static Item iridiumSword;
+	public static Item mysticPowder;
+	
+	public static EnumToolMaterial ToolAdamantine;
+	public static EnumToolMaterial ToolBloodstone;
+	public static EnumToolMaterial ToolBloodstoneWeak;
+	public static EnumToolMaterial ToolMithril;
+	public static EnumToolMaterial ToolVerdite;
+	public static EnumToolMaterial ToolIridium;
+	public static EnumToolMaterial ToolObsidian;
+	public static EnumToolMaterial ToolObsidianWeak;
+
+	public int iridiumID;
+	public int mithrilID;
+	public int adamantineID;
+	public int verditeID;
+	public int emeraldID;
+	public int sapphireID;
+	public int topazID;
+	public int amethystID;
+	public int soulstoneBlackID;
+	public int soulstoneRedID;
+	public int soulstoneBlueID;
+	public int bloodstoneID;
+	public int reinforcedGlassID;
+	//Items
+	public int mithrilIngotID;
+	public int adamantineIngotID;
+	public int verditeIngotID;
+	public int emeraldGemID;
+	public int sapphireGemID;
+	public int topazGemID;
+	public int amethystGemID;
+	public int mithrilPickID;
+	public int mithrilShovelID;
+	public int mithrilAxeID;
+	public int mithrilHoeID;
+	public int mithrilSwordID;
+	public int adamantinePickID;
+	public int adamantineShovelID;
+	public int adamantineAxeID;
+	public int adamantineHoeID;
+	public int adamantineSwordID;
+	public int verditePickID;
+	public int verditeShovelID;
+	public int verditeAxeID;
+	public int verditeHoeID;
+	public int verditeSwordID;
+	public int obsidianShardID;
+	public int obsidianRodID;
+	public int glassShardID;
+	public int bloodstoneShardID;
+	public int bloodstonePickID;
+	public int bloodstoneShovelID;
+	public int bloodstoneAxeID;
+	public int bloodstoneHoeID;
+	public int bloodstoneSwordID;
+	public int obsidianPickID;
+	public int obsidianShovelID;
+	public int obsidianAxeID;
+	public int obsidianHoeID;
+	public int obsidianSwordID;
+	public int iridiumIngotID;
+	public int iridiumNuggetID;
+	public int iridiumPickID;
+	public int iridiumShovelID;
+	public int iridiumAxeID;
+	public int iridiumHoeID;
+	public int iridiumSwordID;
+	public int mysticPowderID;
+	
+	public static CreativeTabs customTab = new MysticTab("customTab");
+
+	@PreInit
+	public void preInit(FMLPreInitializationEvent event) {
+		ModMetadata data = event.getModMetadata();
+		data.autogenerated = false;
+		data.version = "1.0";
+		data.name = "Mystic Ores";
+		data.description = "Adds in a bunch of new ores which have their own toolsets.";
+		data.authorList.add("Grim3212");
+		data.authorList.add("Axebane");
+		data.url = "http://grim3212.wikispaces.com/";
+		data.credits = "Thanks to Axebane for the original mod.";
+		data.logoFile = "/mods/logo.png";
+		
+		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
+		try {
+			config.load();
+			//Blocks
+			iridiumID = config.get(Configuration.CATEGORY_BLOCK, "Mystic Iriduim Ore ID", 2710).getInt(2710);
+			mithrilID = config.get(Configuration.CATEGORY_BLOCK, "Mithril Ore ID", 2711).getInt(2711);
+			adamantineID = config.get(Configuration.CATEGORY_BLOCK, "Adamantine Ore ID", 2712).getInt(2712);
+			verditeID = config.get(Configuration.CATEGORY_BLOCK, "Verdite Ore ID", 2713).getInt(2713);
+			emeraldID = config.get(Configuration.CATEGORY_BLOCK, "Mystic Emerald Ore ID", 2714).getInt(2714);
+			sapphireID = config.get(Configuration.CATEGORY_BLOCK, "Sapphire Ore ID", 2715).getInt(2715);
+			topazID = config.get(Configuration.CATEGORY_BLOCK, "Topaz Ore ID", 2716).getInt(2716);
+			amethystID = config.get(Configuration.CATEGORY_BLOCK, "Amethyst Ore ID", 2717).getInt(2717);
+			soulstoneBlackID = config.get(Configuration.CATEGORY_BLOCK, "Black Soulstone ID", 2718).getInt(2718);
+			soulstoneRedID = config.get(Configuration.CATEGORY_BLOCK, "Red Soulstone ID", 2719).getInt(2719);
+			soulstoneBlueID = config.get(Configuration.CATEGORY_BLOCK, "Blue Soulstone ID", 2720).getInt(2720);
+			bloodstoneID = config.get(Configuration.CATEGORY_BLOCK, "Bloodstone ID", 2721).getInt(2721);
+			reinforcedGlassID = config.get(Configuration.CATEGORY_BLOCK, "Reinforced Glass ID", 2722).getInt(2722);
+			//Items
+			mithrilIngotID = config.get(Configuration.CATEGORY_ITEM, "Mithril Ingot ID", 9071).getInt(9071);
+			adamantineIngotID = config.get(Configuration.CATEGORY_ITEM, "Adamantine Ingot ID", 9072).getInt(9072);
+			verditeIngotID = config.get(Configuration.CATEGORY_ITEM, "Verdite Ingot ID", 9073).getInt(9073);
+			emeraldGemID = config.get(Configuration.CATEGORY_ITEM, "Emerald Gem ID", 9074).getInt(9074);
+			sapphireGemID = config.get(Configuration.CATEGORY_ITEM, "Sapphire Gem ID", 9075).getInt(9075);
+			topazGemID = config.get(Configuration.CATEGORY_ITEM, "Topaz Gem ID", 9076).getInt(9076);
+			amethystGemID = config.get(Configuration.CATEGORY_ITEM, "Amethyst Gem ID", 9077).getInt(9077);
+			mithrilPickID = config.get(Configuration.CATEGORY_ITEM, "Mithril Pickaxe ID", 9078).getInt(9078);
+			mithrilShovelID = config.get(Configuration.CATEGORY_ITEM, "Mithril Shovel ID", 9079).getInt(9079);
+			mithrilAxeID = config.get(Configuration.CATEGORY_ITEM, "Mithril Axe ID", 9080).getInt(9080);
+			mithrilHoeID = config.get(Configuration.CATEGORY_ITEM, "Mithril Hoe ID", 9081).getInt(9081);
+			mithrilSwordID = config.get(Configuration.CATEGORY_ITEM, "Mithril Sword ID", 9082).getInt(9082);
+			adamantinePickID = config.get(Configuration.CATEGORY_ITEM, "Adamantine Pickaxe ID", 9083).getInt(9083);
+			adamantineShovelID = config.get(Configuration.CATEGORY_ITEM, "Adamantine Shovel ID", 9084).getInt(9084);
+			adamantineAxeID = config.get(Configuration.CATEGORY_ITEM, "Adamantine Axe ID", 9085).getInt(9085);
+			adamantineHoeID = config.get(Configuration.CATEGORY_ITEM, "Adamantine Hoe ID", 9086).getInt(9086);
+			adamantineSwordID = config.get(Configuration.CATEGORY_ITEM, "Adamantine Sword ID", 9087).getInt(9087);
+			verditePickID = config.get(Configuration.CATEGORY_ITEM, "Verdite Pickaxe ID", 9088).getInt(9088);
+			verditeShovelID = config.get(Configuration.CATEGORY_ITEM, "Verdite Shovel ID", 9089).getInt(9089);
+			verditeAxeID = config.get(Configuration.CATEGORY_ITEM, "Verdite Axe ID", 9090).getInt(9090);
+			verditeHoeID = config.get(Configuration.CATEGORY_ITEM, "Verdite Hoe ID", 9091).getInt(9091);
+			verditeSwordID = config.get(Configuration.CATEGORY_ITEM, "Verdite Sword ID", 9092).getInt(9092);
+			obsidianShardID = config.get(Configuration.CATEGORY_ITEM, "Obsidian Shard ID", 9093).getInt(9093);
+			obsidianRodID = config.get(Configuration.CATEGORY_ITEM, "Obsidian Rod ID", 9094).getInt(9094);
+			glassShardID = config.get(Configuration.CATEGORY_ITEM, "Glass Shard ID", 9095).getInt(9095);
+			bloodstoneShardID = config.get(Configuration.CATEGORY_ITEM, "Bloodstone Shard ID", 9096).getInt(9096);
+			bloodstonePickID = config.get(Configuration.CATEGORY_ITEM, "Bloodstone Pickaxe ID", 9097).getInt(9097);
+			bloodstoneShovelID = config.get(Configuration.CATEGORY_ITEM, "Bloodstone Shovel ID", 9098).getInt(9098);
+			bloodstoneAxeID = config.get(Configuration.CATEGORY_ITEM, "Bloodstone Axe ID", 9099).getInt(9099);
+			bloodstoneHoeID = config.get(Configuration.CATEGORY_ITEM, "Bloodstone Hoe ID", 9100).getInt(9100);
+			bloodstoneSwordID = config.get(Configuration.CATEGORY_ITEM, "Bloodstone Sword ID", 9101).getInt(9101);
+			obsidianPickID = config.get(Configuration.CATEGORY_ITEM, "Obsidian Pickaxe ID", 9102).getInt(9102);
+			obsidianShovelID = config.get(Configuration.CATEGORY_ITEM, "Obsidian Shovel ID", 9103).getInt(9103);
+			obsidianAxeID = config.get(Configuration.CATEGORY_ITEM, "Obsidian Axe ID", 9104).getInt(9104);
+			obsidianHoeID = config.get(Configuration.CATEGORY_ITEM, "Obsidian Hoe ID", 9105).getInt(9105);
+			obsidianSwordID = config.get(Configuration.CATEGORY_ITEM, "Obsidian Sword ID", 9106).getInt(9106);
+			iridiumIngotID = config.get(Configuration.CATEGORY_ITEM, "Iridium Ingot ID", 9107).getInt(9107);
+			iridiumNuggetID = config.get(Configuration.CATEGORY_ITEM, "Iridium Nugget ID", 9108).getInt(9108);
+			iridiumPickID = config.get(Configuration.CATEGORY_ITEM, "Iridium Pickaxe ID", 9109).getInt(9109);
+			iridiumShovelID = config.get(Configuration.CATEGORY_ITEM, "Iridium Shovel ID", 9110).getInt(9110);
+			iridiumAxeID = config.get(Configuration.CATEGORY_ITEM, "Iridium Axe ID", 9111).getInt(9111);
+			iridiumHoeID = config.get(Configuration.CATEGORY_ITEM, "Iridium Hoe ID", 9112).getInt(9112);
+			iridiumSwordID = config.get(Configuration.CATEGORY_ITEM, "Iridium Sword ID", 9113).getInt(9113);
+			mysticPowderID = config.get(Configuration.CATEGORY_ITEM, "Mystic Powder ID", 9114).getInt(9114);
+			
+		} catch (Exception e) {
+			FMLLog.log(Level.SEVERE, e, "Mystic Ores has had a problem loading it's configuration");
+		} finally {
+			config.save();
+		}
+	}
+	
+	
+	@Init
+	public void load(FMLInitializationEvent event) {
+		proxy.registerRenderInformation();
+		GameRegistry.registerWorldGenerator(new MysticOresGenerator());
+		LanguageRegistry.instance().addStringLocalization("itemGroup.customTab", "en_US", "Mystic Pack");
+		
+		
+		iridium = (new BlockIridium(iridiumID, 21)).setHardness(0.4F).setResistance(5F).setUnlocalizedName("iridium").setLightValue(0.7888F).setCreativeTab(MysticOres.customTab);
+		
+		
+		mithrilIngot = (new ItemMystic(mithrilIngotID)).setUnlocalizedName("mithrilIngot");
+		adamantineIngot = (new ItemMystic(adamantineIngotID)).setUnlocalizedName("adamantineIngot");
+		verditeIngot = (new ItemMystic(verditeIngotID)).setUnlocalizedName("verditeIngot");
+		emeraldGem = (new ItemMystic(emeraldGemID)).setUnlocalizedName("emeraldGem");
+		sapphireGem = (new ItemMystic(sapphireGemID)).setUnlocalizedName("sapphireGem");
+		topazGem = (new ItemMystic(topazGemID)).setUnlocalizedName("topazGem");
+		amethystGem = (new ItemMystic(amethystGemID)).setUnlocalizedName("amethystGem");
+		obsidianShard = (new ItemMystic(obsidianShardID)).setUnlocalizedName("obsidianShard");
+		obsidianRod = (new ItemMystic(obsidianRodID)).setUnlocalizedName("obsidianRod");
+		glassShard = (new ItemMystic(glassShardID)).setUnlocalizedName("glassShard");
+		bloodstoneShard = (new ItemMystic(bloodstoneShardID)).setUnlocalizedName("bloodstoneShard");
+		iridiumIngot = (new ItemMystic(iridiumIngotID)).setUnlocalizedName("iridiumIngot");
+		iridiumNugget = (new ItemMystic(iridiumNuggetID)).setUnlocalizedName("iridiumNugget");
+		mysticPowder = (new ItemMystic(mysticPowderID)).setUnlocalizedName("mysticPowder");
+		
+		
+		mithril = (new BlockMithril(mithrilID, 25, Material.rock)).setHardness(1.0F).setResistance(5F).setUnlocalizedName("mithril").setLightValue(0.6888F).setCreativeTab(MysticOres.customTab);
+		adamantine = (new BlockAdamantine(adamantineID, 20)).setHardness(2.0F).setResistance(5F).setUnlocalizedName("adamantine").setCreativeTab(MysticOres.customTab);
+		verdite = (new BlockVerdite(verditeID, 26)).setHardness(0.5F).setResistance(5F).setUnlocalizedName("verdite").setCreativeTab(MysticOres.customTab);
+		emerald = (new BlockEmerald(emeraldID, 24)).setHardness(0.2F).setResistance(5F).setUnlocalizedName("emerald").setLightValue(0.6888F).setCreativeTab(MysticOres.customTab);
+		sapphire = (new BlockSapphire(sapphireID, 31)).setHardness(0.2F).setResistance(5F).setUnlocalizedName("sapphire").setLightValue(0.6888F).setCreativeTab(MysticOres.customTab);
+		topaz = (new BlockTopaz(topazID, 27)).setHardness(0.2F).setResistance(5F).setUnlocalizedName("topaz").setLightValue(0.7888F).setCreativeTab(MysticOres.customTab);
+		amethyst = (new BlockAmethyst(amethystID, 22)).setHardness(0.2F).setResistance(5F).setUnlocalizedName("amethyst").setLightValue(0.7888F).setCreativeTab(MysticOres.customTab);
+		soulstoneBlack = (new BlockSoulstoneBlack(soulstoneBlackID, 30)).setHardness(0.3F).setResistance(5F).setUnlocalizedName("soulstoneBlack1").setLightValue(0.8888F).setCreativeTab(MysticOres.customTab);
+		soulstoneRed = (new BlockSoulstoneRed(soulstoneRedID, 28)).setHardness(0.6F).setResistance(5F).setUnlocalizedName("soulstoneRed1").setLightValue(0.8888F).setCreativeTab(MysticOres.customTab);
+		soulstoneBlue = (new BlockSoulstoneBlue(soulstoneBlueID, 29)).setHardness(1.2F).setResistance(5F).setUnlocalizedName("soulstoneBlue1").setLightValue(0.8888F).setCreativeTab(MysticOres.customTab);
+		bloodstone = (new BlockBloodstone(bloodstoneID, 23)).setHardness(4F).setResistance(2000F).setUnlocalizedName("bloodstone").setCreativeTab(MysticOres.customTab);
+		
+		
+		ToolAdamantine = EnumHelper.addToolMaterial("ADAMANTINE", 3, 3000, 10F, 4, 8);
+		ToolBloodstone = EnumHelper.addToolMaterial("BLOODSTONE", 3, 200, 16F, 5, 8);
+		ToolBloodstoneWeak = EnumHelper.addToolMaterial("BLOODSTONEWEAK", 3, 50, 16F, 8, 8);
+		ToolMithril = EnumHelper.addToolMaterial("MYTHRIL", 2, 500, 7F, 2, 8);
+		ToolVerdite = EnumHelper.addToolMaterial("VERDITE", 1, 262, 5F, 1, 8);
+		ToolIridium = EnumHelper.addToolMaterial("IRIDIUM", 3, 4000, 12F, 6, 8);
+		ToolObsidian = EnumHelper.addToolMaterial("OBSIDIAN", 3, 100, 14F, 5, 8);
+		ToolObsidianWeak = EnumHelper.addToolMaterial("OBSIDIANWEAK", 3, 25, 14F, 8, 8);
+		
+		
+		reinforcedGlass = (new BlockReinforcedGlass(reinforcedGlassID, "reinforced_glass", Material.glass, false)).setHardness(2.0F).setResistance(2000F).setStepSound(Block.soundGlassFootstep).setUnlocalizedName("reinforcedGlass").setCreativeTab(MysticOres.customTab);
+		
+		
+		mithrilPick = (new ItemMysticPickaxe(mithrilPickID, ToolMithril)).setUnlocalizedName("mithrilPick");
+		mithrilShovel = (new ItemMysticSpade(mithrilShovelID, ToolMithril)).setUnlocalizedName("mithrilShovel");
+		mithrilAxe = (new ItemMysticAxe(mithrilAxeID, ToolMithril)).setUnlocalizedName("mithrilAxe");
+		mithrilHoe = (new ItemMysticHoe(mithrilHoeID, ToolMithril)).setUnlocalizedName("mithrilHoe");
+		mithrilSword = (new ItemMysticSword(mithrilSwordID, ToolMithril)).setUnlocalizedName("mithrilSword");
+		adamantinePick = (new ItemMysticPickaxe(adamantinePickID, ToolAdamantine)).setUnlocalizedName("adamantinePick");
+		adamantineShovel = (new ItemMysticSpade(adamantineShovelID, ToolAdamantine)).setUnlocalizedName("adamantineShovel");
+		adamantineAxe = (new ItemMysticAxe(adamantineAxeID, ToolAdamantine)).setUnlocalizedName("adamantineAxe");
+		adamantineHoe = (new ItemMysticHoe(adamantineHoeID, ToolAdamantine)).setUnlocalizedName("adamantineHoe");
+		adamantineSword = (new ItemMysticSword(adamantineSwordID, ToolAdamantine)).setUnlocalizedName("adamantineSword");
+		verditePick = (new ItemMysticPickaxe(verditePickID, ToolVerdite)).setUnlocalizedName("verditePick");
+		verditeShovel = (new ItemMysticSpade(verditeShovelID, ToolVerdite)).setUnlocalizedName("verditeShovel");
+		verditeAxe = (new ItemMysticAxe(verditeAxeID, ToolVerdite)).setUnlocalizedName("verditeAxe");
+		verditeHoe = (new ItemMysticHoe(verditeHoeID, ToolVerdite)).setUnlocalizedName("verditeHoe");
+		verditeSword = (new ItemMysticSword(verditeSwordID, ToolVerdite)).setUnlocalizedName("verditeSword");
+		bloodstonePick = (new ItemMysticPickaxe(bloodstonePickID, ToolBloodstone)).setUnlocalizedName("bloodstonePick");
+		bloodstoneShovel = (new ItemMysticSpade(bloodstoneShovelID, ToolBloodstone)).setUnlocalizedName("bloodstoneShovel");
+		bloodstoneAxe = (new ItemMysticAxe(bloodstoneAxeID, ToolBloodstone)).setUnlocalizedName("bloodstoneAxe");
+		bloodstoneHoe = (new ItemMysticHoe(bloodstoneHoeID, ToolBloodstone)).setUnlocalizedName("bloodstoneHoe");
+		bloodstoneSword = (new ItemMysticSword(bloodstoneSwordID, ToolBloodstoneWeak)).setUnlocalizedName("bloodstoneSword");
+		obsidianPick = (new ItemMysticPickaxe(obsidianPickID, ToolObsidian)).setUnlocalizedName("obsidianPick");
+		obsidianShovel = (new ItemMysticSpade(obsidianShovelID, ToolObsidian)).setUnlocalizedName("obsidianShovel");
+		obsidianAxe = (new ItemMysticAxe(obsidianAxeID, ToolObsidian)).setUnlocalizedName("obsidianAxe");
+		obsidianHoe = (new ItemMysticHoe(obsidianHoeID, ToolObsidian)).setUnlocalizedName("obsidianHoe");
+		obsidianSword = (new ItemMysticSword(obsidianSwordID, ToolObsidianWeak)).setUnlocalizedName("obsidianSword");
+		iridiumPick = (new ItemMysticPickaxe(iridiumPickID, ToolIridium)).setUnlocalizedName("iridiumPick");
+		iridiumShovel = (new ItemMysticSpade(iridiumShovelID, ToolIridium)).setUnlocalizedName("iridiumShovel");
+		iridiumAxe = (new ItemMysticAxe(iridiumAxeID, ToolIridium)).setUnlocalizedName("iridiumAxe");
+		iridiumHoe = (new ItemMysticHoe(iridiumHoeID, ToolIridium)).setUnlocalizedName("iridiumHoe");
+		iridiumSword = (new ItemMysticSword(iridiumSwordID, ToolIridium)).setUnlocalizedName("iridiumSword");
+
+		GameRegistry.registerBlock(mithril);
+		GameRegistry.registerBlock(adamantine);
+		GameRegistry.registerBlock(verdite);
+		GameRegistry.registerBlock(emerald);
+		GameRegistry.registerBlock(sapphire);
+		GameRegistry.registerBlock(topaz);
+		GameRegistry.registerBlock(amethyst);
+		GameRegistry.registerBlock(soulstoneBlack);
+		GameRegistry.registerBlock(soulstoneRed);
+		GameRegistry.registerBlock(soulstoneBlue);
+		GameRegistry.registerBlock(bloodstone);
+		GameRegistry.registerBlock(reinforcedGlass);
+		GameRegistry.registerBlock(iridium);
+		
+		MinecraftForge.setToolClass(mithrilAxe, "axe", 2);
+		MinecraftForge.setToolClass(mithrilShovel, "shovel", 2);
+		MinecraftForge.setToolClass(mithrilPick, "pickaxe", 2);
+		MinecraftForge.setToolClass(iridiumAxe, "axe", 3);
+		MinecraftForge.setToolClass(iridiumPick, "pickaxe", 3);
+		MinecraftForge.setToolClass(iridiumShovel, "shovel", 3);
+		MinecraftForge.setToolClass(verditeShovel, "shovel", 1);
+		MinecraftForge.setToolClass(verditePick, "pickaxe", 1);
+		MinecraftForge.setToolClass(verditeAxe, "axe", 1);
+		MinecraftForge.setToolClass(adamantineAxe, "axe", 3);
+		MinecraftForge.setToolClass(adamantinePick, "pickaxe", 3);
+		MinecraftForge.setToolClass(adamantineShovel, "shovel", 3);
+		MinecraftForge.setToolClass(obsidianAxe, "axe", 3);
+		MinecraftForge.setToolClass(obsidianPick, "pickaxe", 3);
+		MinecraftForge.setToolClass(obsidianShovel, "shovel", 3);
+		MinecraftForge.setToolClass(bloodstoneAxe, "axe", 3);
+		MinecraftForge.setToolClass(bloodstonePick, "pickaxe", 3);
+		MinecraftForge.setToolClass(bloodstoneShovel, "shovel", 3);
+		
+		LanguageRegistry.addName(mithril, "Mithril Ore");
+		LanguageRegistry.addName(mithrilIngot, "Mithril Ingot");
+		LanguageRegistry.addName(adamantine, "Adamantine Ore");
+		LanguageRegistry.addName(adamantineIngot, "Adamantine Ingot");
+		LanguageRegistry.addName(verdite, "Verdite Ore");
+		LanguageRegistry.addName(verditeIngot, "Verdite Ingot");
+		LanguageRegistry.addName(mithrilPick, "Mithril Pickaxe");
+		LanguageRegistry.addName(mithrilShovel, "Mithril Shovel");
+		LanguageRegistry.addName(mithrilAxe, "Mithril Axe");
+		LanguageRegistry.addName(mithrilHoe, "Mithril Hoe");
+		LanguageRegistry.addName(mithrilSword, "Mithril Sword");
+		LanguageRegistry.addName(adamantinePick, "Adamantine Pickaxe");
+		LanguageRegistry.addName(adamantineShovel, "Adamantine Shovel");
+		LanguageRegistry.addName(adamantineAxe, "Adamantine Axe");
+		LanguageRegistry.addName(adamantineHoe, "Adamantine Hoe");
+		LanguageRegistry.addName(adamantineSword, "Adamantine Sword");
+		LanguageRegistry.addName(verditePick, "Verdite Pickaxe");
+		LanguageRegistry.addName(verditeShovel, "Verdite Shovel");
+		LanguageRegistry.addName(verditeAxe, "Verdite Axe");
+		LanguageRegistry.addName(verditeHoe, "Verdite Hoe");
+		LanguageRegistry.addName(verditeSword, "Verdite Sword");
+		LanguageRegistry.addName(emerald, "Mystic Emerald Ore");
+		LanguageRegistry.addName(emeraldGem, "Mystic Emerald");
+		LanguageRegistry.addName(sapphire, "Sapphire Ore");
+		LanguageRegistry.addName(sapphireGem, "Mystic Sapphire");
+		LanguageRegistry.addName(topaz, "Topaz Ore");
+		LanguageRegistry.addName(topazGem, "Mystic Topaz");
+		LanguageRegistry.addName(amethyst, "Amethyst Ore");
+		LanguageRegistry.addName(amethystGem, "Mystic Amethyst");
+		LanguageRegistry.addName(soulstoneBlack, "Black Soulstone");
+		LanguageRegistry.addName(soulstoneRed, "Red Soulstone");
+		LanguageRegistry.addName(soulstoneBlue, "Blue Soulstone");
+		LanguageRegistry.addName(obsidianShard, "Obsidian Shard");
+		LanguageRegistry.addName(obsidianRod, "Obsidian Rod");
+		LanguageRegistry.addName(glassShard, "Glass Shard");
+		LanguageRegistry.addName(bloodstone, "Bloodstone");
+		LanguageRegistry.addName(bloodstoneShard, "Bloodstone Shard");
+		LanguageRegistry.addName(bloodstonePick, "Bloodstone Pickaxe");
+		LanguageRegistry.addName(bloodstoneShovel, "Bloodstone Shovel");
+		LanguageRegistry.addName(bloodstoneAxe, "Bloodstone Axe");
+		LanguageRegistry.addName(bloodstoneHoe, "Bloodstone Hoe");
+		LanguageRegistry.addName(bloodstoneSword, "Bloodstone Sword");
+		LanguageRegistry.addName(obsidianPick, "Obsidian Pickaxe");
+		LanguageRegistry.addName(obsidianShovel, "Obsidian Shovel");
+		LanguageRegistry.addName(obsidianAxe, "Obsidian Axe");
+		LanguageRegistry.addName(obsidianHoe, "Obsidian Hoe");
+		LanguageRegistry.addName(obsidianSword, "Obsidian Sword");
+		LanguageRegistry.addName(reinforcedGlass, "Reinforced Glass");
+		LanguageRegistry.addName(iridium, "Iridium Ore");
+		LanguageRegistry.addName(iridiumIngot, "Iridium Ingot");
+		LanguageRegistry.addName(iridiumNugget, "Iridium Nugget");
+		LanguageRegistry.addName(iridiumPick, "Iridium Pickaxe");
+		LanguageRegistry.addName(iridiumShovel, "Iridium Shovel");
+		LanguageRegistry.addName(iridiumAxe, "Iridium Axe");
+		LanguageRegistry.addName(iridiumHoe, "Iridium Hoe");
+		LanguageRegistry.addName(iridiumSword, "Iridium Sword");
+		LanguageRegistry.addName(mysticPowder, "Mystic Powder");
+		
+		GameRegistry.addRecipe(new ItemStack(mithrilPick, 1), new Object[] { "XXX", " | ", " | ", 'X', mithrilIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(mithrilShovel, 1), new Object[] { " X ", " | ", " | ", 'X', mithrilIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(mithrilAxe, 1), new Object[] { "XX ", "X| ", " | ", 'X', mithrilIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(mithrilHoe, 1), new Object[] { "XX ", " | ", " | ", 'X', mithrilIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(mithrilSword, 1), new Object[] { " X ", " X ", " | ", 'X', mithrilIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(adamantinePick, 1), new Object[] { "XXX", " | ", " | ", 'X', adamantineIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(adamantineShovel, 1), new Object[] { " X ", " | ", " | ", 'X', adamantineIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(adamantineAxe, 1), new Object[] { "XX ", "X| ", " | ", 'X', adamantineIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(adamantineHoe, 1), new Object[] { "XX ", " | ", " | ", 'X', adamantineIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(adamantineSword, 1), new Object[] { " X ", " X ", " | ", 'X', adamantineIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(verditePick, 1), new Object[] { "XXX", " | ", " | ", 'X', verditeIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(verditeShovel, 1), new Object[] { " X ", " | ", " | ", 'X', verditeIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(verditeAxe, 1), new Object[] { "XX ", "X| ", " | ", 'X', verditeIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(verditeHoe, 1), new Object[] { "XX ", " | ", " | ", 'X', verditeIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(verditeSword, 1), new Object[] { " X ", " X ", " | ", 'X', verditeIngot, '|', Item.stick });
+		GameRegistry.addRecipe(new ItemStack(bloodstonePick, 1), new Object[] { "XXX", " | ", " | ", 'X', bloodstone, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(bloodstoneShovel, 1), new Object[] { " X ", " | ", " | ", 'X', bloodstone, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(bloodstoneAxe, 1), new Object[] { "XX ", "X| ", " | ", 'X', bloodstone, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(bloodstoneHoe, 1), new Object[] { "XX ", " | ", " | ", 'X', bloodstone, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(bloodstoneSword, 1), new Object[] { " X ", " X ", " | ", 'X', bloodstone, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(obsidianPick, 1), new Object[] { "XXX", " | ", " | ", 'X', Block.obsidian, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(obsidianShovel, 1), new Object[] { " X ", " | ", " | ", 'X', Block.obsidian, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(obsidianAxe, 1), new Object[] { "XX ", "X| ", " | ", 'X', Block.obsidian, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(obsidianHoe, 1), new Object[] { "XX ", " | ", " | ", 'X', Block.obsidian, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(obsidianSword, 1), new Object[] { " X ", " X ", " | ", 'X', Block.obsidian, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(iridiumPick, 1), new Object[] { "XXX", " | ", " | ", 'X', iridiumIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(iridiumShovel, 1), new Object[] { " X ", " | ", " | ", 'X', iridiumIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(iridiumAxe, 1), new Object[] { "XX ", "X| ", " | ", 'X', iridiumIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(iridiumHoe, 1), new Object[] { "XX ", " | ", " | ", 'X', iridiumIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(iridiumSword, 1), new Object[] { " X ", " X ", " | ", 'X', iridiumIngot, '|', obsidianRod });
+		GameRegistry.addRecipe(new ItemStack(Item.slimeBall, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.stone, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Block.cobblestoneMossy, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.cobblestone, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(verditeIngot, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Item.ingotIron, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(BlockGrass.grass, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sand, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(verdite, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.dirt, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Item.seeds, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sapling, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(verdite, 16), new Object[] { "XXX", "XOX", "XXX", 'X', mithril, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Item.wheat, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.reed, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Item.seeds, 32), new Object[] { "XXX", "XOX", "XXX", 'X', Item.egg, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Block.cactus, 32), new Object[] { "XXX", "XOX", "XXX", 'X', Item.slimeBall, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Block.oreCoal, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.gravel, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Item.flint, 8), new Object[] { "XXX", "XOX", "XXX", 'X', glassShard, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Block.tallGrass, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.seeds, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Block.bookShelf, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.planks, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Block.cloth, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.glass, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Item.leather, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.stick, 'O', emeraldGem });
+		GameRegistry.addRecipe(new ItemStack(Block.glass, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.stone, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.ice, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.blockSnow, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.blockLapis, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.blockSteel, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.reed, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sapling, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.glass, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sand, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.blockSnow, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.dirt, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.oreLapis, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.oreCoal, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Item.snowball, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.reed, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Item.sugar, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Item.egg, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Item.clay, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Item.slimeBall, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(obsidianPick, 1), new Object[] { "XXX", "XOX", "XXX", 'X', obsidianShard, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(mithrilSword, 1), new Object[] { "XXX", "XOX", "XXX", 'X', glassShard, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.mushroomBrown, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.seeds, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.sandStone, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.planks, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.snow, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.glass, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Item.silk, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.stick, 'O', sapphireGem });
+		GameRegistry.addRecipe(new ItemStack(Block.sandStone, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.stone, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.netherrack, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.cobblestone, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.blockGold, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.blockSteel, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.wood, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sapling, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.sponge, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sand, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.oreIron, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.dirt, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.oreRedstone, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.oreLapis, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Item.appleRed, 1), new Object[] { "XXX", "XOX", "XXX", 'X', Block.reed, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Item.feather, 32), new Object[] { "XXX", "XOX", "XXX", 'X', Item.egg, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.pumpkin, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.slimeBall, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(bloodstoneShard, 16), new Object[] { "XXX", "XOX", "XXX", 'X', obsidianShard, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Item.arrow, 32), new Object[] { "XXX", "XOX", "XXX", 'X', glassShard, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.mushroomRed, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.seeds, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.doorWood, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.planks, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.glowStone, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.glass, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Item.bone, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.stick, 'O', topazGem });
+		GameRegistry.addRecipe(new ItemStack(Block.blockClay, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.stone, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Block.tnt, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.brick, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Item.diamond, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.blockLapis, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(BlockLeaves.leaves, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sapling, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Block.oreGold, 16), new Object[] { "XXX", "XOX", "XXX", 'X', Block.sand, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(mithril, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.dirt, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Block.oreDiamond, 4), new Object[] { "XXX", "XOX", "XXX", 'X', Block.oreRedstone, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Item.book, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.reed, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Item.cookie, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.egg, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Item.cake, 1), new Object[] { "XXX", "XOX", "XXX", 'X', Item.slimeBall, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(iridiumNugget, 8), new Object[] { "XXX", "XOX", "XXX", 'X', obsidianShard, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(obsidianShard, 8), new Object[] { "XXX", "XOX", "XXX", 'X', glassShard, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Block.deadBush, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.seeds, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Block.music, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.planks, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Block.pumpkinLantern, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Block.glass, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(obsidianRod, 8), new Object[] { "XXX", "XOX", "XXX", 'X', Item.stick, 'O', amethystGem });
+		GameRegistry.addRecipe(new ItemStack(Block.obsidian, 1), new Object[] { "XX", "XX", 'X', obsidianShard });
+		GameRegistry.addRecipe(new ItemStack(obsidianRod, 2), new Object[] { "X", "X", 'X', obsidianShard });
+		GameRegistry.addRecipe(new ItemStack(obsidianShard, 4), new Object[] { "X", 'X', Block.obsidian });
+		GameRegistry.addRecipe(new ItemStack(Block.glass, 1), new Object[] { "XX", "XX", 'X', glassShard });
+		GameRegistry.addRecipe(new ItemStack(glassShard, 4), new Object[] { "X", 'X', Block.glass });
+		GameRegistry.addRecipe(new ItemStack(bloodstoneShard, 2), new Object[] { "X", 'X', bloodstone });
+		GameRegistry.addRecipe(new ItemStack(bloodstone, 1), new Object[] { "XX", "XX", 'X', bloodstoneShard });
+		GameRegistry.addRecipe(new ItemStack(iridiumIngot, 1), new Object[] { "XXX", "XOX", "XXX", 'X', iridiumNugget, 'O', adamantineIngot });
+		
+		GameRegistry.addShapelessRecipe(new ItemStack(mysticPowder, 6), new Object[] { emeraldGem, sapphireGem, topazGem, amethystGem });
+		GameRegistry.addShapelessRecipe(new ItemStack(reinforcedGlass, 1), new Object[] { Block.glass, obsidianShard });
+		GameRegistry.addShapelessRecipe(new ItemStack(Block.oreCoal, 2), new Object[] { mysticPowder, Block.oreCoal });
+		GameRegistry.addShapelessRecipe(new ItemStack(verdite, 3), new Object[] { mysticPowder, verdite });
+		GameRegistry.addShapelessRecipe(new ItemStack(Block.oreIron, 3), new Object[] { mysticPowder, Block.oreIron });
+		GameRegistry.addShapelessRecipe(new ItemStack(mithril, 3), new Object[] { mysticPowder, mithril });
+		GameRegistry.addShapelessRecipe(new ItemStack(Block.oreGold, 3), new Object[] { mysticPowder, Block.oreGold });
+		GameRegistry.addShapelessRecipe(new ItemStack(Block.oreRedstone, 2), new Object[] { mysticPowder, Block.oreRedstone });
+		GameRegistry.addShapelessRecipe(new ItemStack(Block.oreLapis, 2), new Object[] { mysticPowder, Block.oreLapis });
+		GameRegistry.addShapelessRecipe(new ItemStack(Block.oreDiamond, 2), new Object[] { mysticPowder, Block.oreDiamond });
+		GameRegistry.addShapelessRecipe(new ItemStack(adamantine, 2), new Object[] { mysticPowder, adamantine });
+		GameRegistry.addShapelessRecipe(new ItemStack(iridium, 2), new Object[] { mysticPowder, iridium });
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.sugar, 18), new Object[] { mysticPowder, Item.sugar });
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.redstone, 12), new Object[] { mysticPowder, Item.redstone });
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.lightStoneDust, 6), new Object[] { mysticPowder, Item.lightStoneDust });
+		GameRegistry.addShapelessRecipe(new ItemStack(Item.gunpowder, 3), new Object[] { mysticPowder, Item.gunpowder });
+		GameRegistry.addShapelessRecipe(new ItemStack(iridiumNugget, 2), new Object[] { mysticPowder, iridiumNugget });
+		
+		GameRegistry.addSmelting(mithril.blockID, new ItemStack(mithrilIngot, 1), 0);
+		GameRegistry.addSmelting(adamantine.blockID, new ItemStack(adamantineIngot, 1), 0);
+		GameRegistry.addSmelting(verdite.blockID, new ItemStack(verditeIngot, 1), 0);
+	}
+
+	public int addFuel(int id, int metadata) {
+		return id != iridiumNugget.itemID ? 0 : 12800;
+	}
+}
